@@ -38,3 +38,33 @@ var mergeTwoLists = function(list1, list2) {
     // the initial value of the tail will be 0 on creation, so returning tail.next starts the return from the first number passed from list1/list2
     return tail.next;
 };
+
+// Linked List Cycle
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+// Just learned about "Floyd's Tortoise & Hare" where you set a "fast" and a "slow" pointer to iterate through the linkedList, and if at any point the slow pointer is equal to the fast pointer, you have a cycle.
+var hasCycle = function(head) {
+    let [slowPointer, fastPointer] = [head, head]
+
+    // then, we set a while loop, because we only want this function to run while there is a fastPointer, and a value for next that is not null
+
+    while (fastPointer && fastPointer.next) {
+        // Then, you want to actually dictate how these pointers behave, by setting them to the next value in the list
+        slowPointer = slowPointer.next;
+        fastPointer = fastPointer.next.next;
+
+        if (slowPointer === fastPointer) return true;
+    }
+    return false;
+    
+};
