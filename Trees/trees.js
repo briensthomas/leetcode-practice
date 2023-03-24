@@ -18,8 +18,6 @@
      / \    / \
 
 */
-
-
 var invertTree = function(root) {
     // If the root is null, we don't need to continue with the algorithm
     if (root === null) return root;
@@ -39,4 +37,35 @@ var invertTree = function(root) {
     // then return the root
     return root;
     
+};
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    // if the root has no value, the max depth is 0;
+    if (root === null) return 0;
+
+    // We need a way to check the depth of each side of the tree when the root does have a value
+    function depthFirstSearch(root) {
+    // recursively call the original function on each child(left, right) of the root
+        let leftSubTree = maxDepth(root.left);
+        let rightSubTree = maxDepth(root.right);
+    // instead of comparing the size of the children, we can run it through a built-in method
+    // to return the larger of the two numbers
+        const depth = Math.max(leftSubTree, rightSubTree);
+    // Since the root counts as a depth of 1, that needs to be added to the Math.max();
+        return depth + 1;
+    };
+
+    return depthFirstSearch(root);
 };
